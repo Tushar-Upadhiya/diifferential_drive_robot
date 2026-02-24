@@ -1,0 +1,11 @@
+{
+    "name": "ROS 2 Project: ${PWD##*/}",
+    "build": { "dockerfile": "Dockerfile" },
+    "runArgs": [
+        "--net=host",
+        "--privileged",
+        "-e", "DISPLAY=${env:DISPLAY}",
+        "-v", "/tmp/.X11-unix:/tmp/.X11-unix"
+    ],
+    "remoteUser": "Tushar"
+}
