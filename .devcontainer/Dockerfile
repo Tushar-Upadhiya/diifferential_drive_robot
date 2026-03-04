@@ -3,6 +3,7 @@ FROM osrf/ros:humble-desktop
 RUN apt-get update && apt-get install -y \
     sudo \
     python3-colcon-common-extensions \
+    tmux \
     ros-humble-turtlesim \
     && rm -rf /var/lib/apt/lists/*
 
