@@ -4,6 +4,7 @@ RUN apt-get update && apt-get install -y \
     sudo \
     python3-colcon-common-extensions \
     tmux \
+    python3-pip \
     ros-humble-turtlesim \
     && rm -rf /var/lib/apt/lists/*
 

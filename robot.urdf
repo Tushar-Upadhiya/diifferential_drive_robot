@@ -1,0 +1,77 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape document_id: d89f14af0079025ec4981310 / workspace_id: 646f15b858d5819e9077a64e -->
+<robot name="differential_drive_robot">
+  <!-- Link base_link -->
+  <link name="base_link">
+    <inertial>
+      <origin xyz="-0.00742972 0.00437318 0.0154363" rpy="0 0 0"/>
+      <mass value="0.731356"/>
+      <inertia ixx="0.00108432" ixy="-2.75594e-07" ixz="-1.85104e-05" iyy="0.00114559" iyz="-9.14534e-07" izz="0.00200515"/>
+    </inertial>
+    <!-- Part base_link -->
+    <visual>
+      <origin xyz="-0.0103376 0.00432315 -0.0155639" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/base_link.stl"/>
+      </geometry>
+      <material name="base_link_material">
+        <color rgba="0.898039 0.792157 0.619608 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0103376 0.00432315 -0.0155639" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/base_link.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part font_ultra_1 -->
+    <visual>
+      <origin xyz="-0.0103376 0.00432315 0.0984361" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/font_ultra_1.stl"/>
+      </geometry>
+      <material name="font_ultra_1_material">
+        <color rgba="0.964706 0.964706 0.952941 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0103376 0.00432315 0.0984361" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/font_ultra_1.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part left_ultra_1 -->
+    <visual>
+      <origin xyz="-0.0103376 0.00432315 -0.0155639" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/left_ultra_1.stl"/>
+      </geometry>
+      <material name="left_ultra_1_material">
+        <color rgba="0.964706 0.964706 0.952941 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0103376 0.00432315 -0.0155639" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/left_ultra_1.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part right_ulta_1 -->
+    <visual>
+      <origin xyz="-0.0103376 0.00432315 -0.0155639" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/right_ulta_1.stl"/>
+      </geometry>
+      <material name="right_ulta_1_material">
+        <color rgba="0.964706 0.964706 0.952941 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0103376 0.00432315 -0.0155639" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/right_ulta_1.stl"/>
+      </geometry>
+    </collision>
+  </link>
+</robot>
