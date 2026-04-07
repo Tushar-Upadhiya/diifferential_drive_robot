@@ -8,10 +8,12 @@ RUN apt-get update && apt-get install -y \
     ros-humble-turtlesim \
     ros-humble-gazebo-ros-pkgs \
     ros-humble-gazebo-ros2-control \
-    # URDF and Xacro tools
     ros-humble-xacro \
     ros-humble-joint-state-publisher-gui \
-    # These are often needed for custom messages and builds
+
+    libgl1-mesa-dri \
+    libgl1-mesa-glx \
+
     ros-humble-ros2-control \
     ros-humble-ros2-controllers \
 
