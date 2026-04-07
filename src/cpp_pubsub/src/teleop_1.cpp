@@ -62,9 +62,9 @@ class TeleopNode:public rclcpp::Node{
     }
     void restore_mode(){
        
-        tcsetattr(STDIN_FILENO, TCSANOW, &raw);
+        tcsetattr(STDIN_FILENO, TCSANOW, &original_termios_);
     }
-    struct terminos original_termios_;
+    struct termios original_termios_;
     rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr publisher_;
 };
 int main(int argc,char* argv[]){
