@@ -9,6 +9,10 @@ RUN apt-get update && apt-get install -y \
     ros-humble-gazebo-ros-pkgs \
     ros-humble-gazebo-ros2-control \
     ros-humble-xacro \
+    ros-humble-slam-toolbox \
+    ros-humble-rviz2 \
+    ros-humble-navigation2 \
+    ros-humble-nav2-bringup \
     ros-humble-joint-state-publisher-gui \
 
     libgl1-mesa-dri \
