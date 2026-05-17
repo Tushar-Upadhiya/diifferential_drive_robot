@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <sdf version="1.6">
-  <world name="complex_maze_world">
+  <world name="contained_maze_world">
 
     <include>
       <uri>model://sun</uri>
@@ -19,7 +19,7 @@
           <geometry>
             <plane>
               <normal>0 0 1</normal>
-              <size>20 20</size>
+              <size>40 40</size>
             </plane>
           </geometry>
           <surface>
@@ -35,7 +35,7 @@
           <geometry>
             <plane>
               <normal>0 0 1</normal>
-              <size>20 20</size>
+              <size>40 40</size>
             </plane>
           </geometry>
           <material>
@@ -46,6 +46,63 @@
         </visual>
       </link>
     </model>
+
+    <model name="containment_west_wall">
+      <static>true</static>
+      <link name="link">
+        <pose>-11.0 4.0 0.75 0 0 0</pose>
+        <collision name="coll">
+          <geometry><box><size>0.2 30.0 1.5</size></box></geometry>
+        </collision>
+        <visual name="vis">
+          <geometry><box><size>0.2 30.0 1.5</size></box></geometry>
+          <material><ambient>0.1 0.1 0.1 1</ambient><diffuse>0.1 0.1 0.1 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="containment_east_wall">
+      <static>true</static>
+      <link name="link">
+        <pose>19.0 4.0 0.75 0 0 0</pose>
+        <collision name="coll">
+          <geometry><box><size>0.2 30.0 1.5</size></box></geometry>
+        </collision>
+        <visual name="vis">
+          <geometry><box><size>0.2 30.0 1.5</size></box></geometry>
+          <material><ambient>0.1 0.1 0.1 1</ambient><diffuse>0.1 0.1 0.1 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="containment_south_wall">
+      <static>true</static>
+      <link name="link">
+        <pose>4.0 -11.0 0.75 0 0 0</pose>
+        <collision name="coll">
+          <geometry><box><size>30.0 0.2 1.5</size></box></geometry>
+        </collision>
+        <visual name="vis">
+          <geometry><box><size>30.0 0.2 1.5</size></box></geometry>
+          <material><ambient>0.1 0.1 0.1 1</ambient><diffuse>0.1 0.1 0.1 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="containment_north_wall">
+      <static>true</static>
+      <link name="link">
+        <pose>4.0 19.0 0.75 0 0 0</pose>
+        <collision name="coll">
+          <geometry><box><size>30.0 0.2 1.5</size></box></geometry>
+        </collision>
+        <visual name="vis">
+          <geometry><box><size>30.0 0.2 1.5</size></box></geometry>
+          <material><ambient>0.1 0.1 0.1 1</ambient><diffuse>0.1 0.1 0.1 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
 
     <model name="outer_left_wall">
       <static>true</static>
