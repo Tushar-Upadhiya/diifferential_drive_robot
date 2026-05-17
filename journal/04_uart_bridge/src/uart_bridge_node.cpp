@@ -12,7 +12,7 @@ using std::placeholders::_1;
 class UartBridgeNode : public rclcpp::Node
 {
 public:
-    UartBridgeNode() : Node("uart_bridge_node")
+    UartBridgeNode() : Node("teammate_bridge_node")
     {
         this->declare_parameter("serial_port", "/dev/ttyACM0");
         this->declare_parameter("baud_rate", 115200);

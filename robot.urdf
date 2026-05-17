@@ -1,44 +1,148 @@
 <?xml version="1.0" ?>
-<robot name="differential_drive_robot">
+<robot name="tushar_car">
+
+  <link name="base_footprint"/>
+
+  <joint name="base_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 0.033" rpy="0 0 0"/>
+  </joint>
 
   <link name="base_link">
     <inertial>
-      <origin xyz="-0.00742972 0.00437318 0.0154363" rpy="0 0 0"/>
-      <mass value="0.731356"/>
-      <inertia ixx="0.0108432" ixy="0.0" ixz="0.0" iyy="0.0114559" iyz="0.0" izz="0.0200515"/>
+      <mass value="0.8"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
     </inertial>
-
     <visual>
-      <origin xyz="-0.0103376 0.00432315 -0.0155639" rpy="0 -0 0"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://assets/base_link.stl"/>
+        <box size="0.2 0.15 0.06"/>
       </geometry>
-      <material name="base_link_material">
-        <color rgba="0.898039 0.792157 0.619608 1"/>
-      </material>
     </visual>
-
     <collision>
-      <origin xyz="-0.0103376 0.00432315 0.01" rpy="0 0 0"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <box size="0.20 0.15 0.06"/> 
+        <box size="0.2 0.15 0.06"/>
       </geometry>
     </collision>
-
-    <visual>
-      <origin xyz="-0.0103376 0.00432315 0.0984361" rpy="3.14159 -0 0"/>
-      <geometry>
-        <mesh filename="package://assets/font_ultra_1.stl"/>
-      </geometry>
-    </visual>
   </link>
 
   <gazebo reference="base_link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <kp>1000000.0</kp>
-    <kd>1.0</kd>
-    <material>Gazebo/Grey</material>
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <link name="left_wheel">
+    <inertial>
+      <mass value="0.2"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.033" length="0.025"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.033" length="0.025"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="left_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="left_wheel"/>
+    <origin xyz="0 0.09 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <gazebo reference="left_wheel">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+  <link name="right_wheel">
+    <inertial>
+      <mass value="0.2"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.033" length="0.025"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.033" length="0.025"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="right_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="right_wheel"/>
+    <origin xyz="0 -0.09 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <gazebo reference="right_wheel">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+  <link name="caster_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="0.015"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.015"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+
+  <joint name="caster_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="caster_wheel"/>
+    <origin xyz="0.08 0 -0.018" rpy="0 0 0"/>
+  </joint>
+
+  <gazebo reference="caster_wheel">
+    <material>Gazebo/Black</material>
+    <mu1>0.01</mu1>
+    <mu2>0.01</mu2>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="diff_drive" filename="libgazebo_ros_diff_drive.so">
+      <ros>
+        <namespace>/</namespace>
+        <remapping>cmd_vel:=cmd_vel</remapping>
+        <remapping>odom:=odom</remapping>
+      </ros>
+      <left_joint>left_wheel_joint</left_joint>
+      <right_joint>right_wheel_joint</right_joint>
+      <wheel_separation>0.18</wheel_separation>
+      <wheel_diameter>0.066</wheel_diameter>
+      <max_wheel_torque>20</max_wheel_torque>
+      <max_wheel_acceleration>1.0</max_wheel_acceleration>
+      <command_topic>cmd_vel</command_topic>
+      <robot_base_frame>base_footprint</robot_base_frame>
+      <odometry_topic>odom</odometry_topic>
+      <odometry_frame>odom</odometry_frame>
+      <publish_odom>true</publish_odom>
+      <publish_odom_tf>true</publish_odom_tf>
+      <publish_wheel_tf>true</publish_wheel_tf>
+      <update_rate>30</update_rate>
+    </plugin>
   </gazebo>
 
 </robot>

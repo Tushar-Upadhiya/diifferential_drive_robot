@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <termios.h>
 #include <unistd.h>
+#include <poll.h>
 
 class TeleopNode : public rclcpp::Node
 {
@@ -17,47 +18,61 @@ public:
     void run()
     {
         set_raw_mode();
-        char key;
+        struct pollfd pfd = {STDIN_FILENO, POLLIN, 0};
+        
         while (rclcpp::ok())
         {
-            key = getchar();
-            auto msg = geometry_msgs::msg::Twist();
-
-            switch (key)
+            int num_events = poll(&pfd, 1, 50); // 50ms timeout
+            
+            if (num_events > 0 && (pfd.revents & POLLIN))
             {
-                case 'w': case 'W':
-                    msg.linear.x  =  0.5;
-                    msg.angular.z =  0.0;
-                    RCLCPP_INFO(this->get_logger(), "FORWARD");
-                    break;
-                case 's': case 'S':
-                    msg.linear.x  = -0.5;
-                    msg.angular.z =  0.0;
-                    RCLCPP_INFO(this->get_logger(), "BACKWARD");
-                    break;
-                case 'a': case 'A':
-                    msg.linear.x  =  0.0;
-                    msg.angular.z =  0.5;
-                    RCLCPP_INFO(this->get_logger(), "LEFT");
-                    break;
-                case 'd': case 'D':
-                    msg.linear.x  =  0.0;
-                    msg.angular.z = -0.5;
-                    RCLCPP_INFO(this->get_logger(), "RIGHT");
-                    break;
-                case 'x': case 'X':
-                    msg.linear.x  =  0.0;
-                    msg.angular.z =  0.0;
-                    RCLCPP_INFO(this->get_logger(), "STOP");
-                    break;
-                case 'q': case 'Q':
-                    RCLCPP_INFO(this->get_logger(), "Quitting...");
-                    restore_mode();
-                    return;
-                default:
-                    continue;
+                char key = getchar();
+                auto msg = geometry_msgs::msg::Twist();
+                bool valid_key = true;
+
+                switch (key)
+                {
+                    case 'w': case 'W':
+                        msg.linear.x  =  0.5;
+                        msg.angular.z =  0.0;
+                        RCLCPP_INFO(this->get_logger(), "FORWARD");
+                        break;
+                    case 's': case 'S':
+                        msg.linear.x  = -0.5;
+                        msg.angular.z =  0.0;
+                        RCLCPP_INFO(this->get_logger(), "BACKWARD");
+                        break;
+                    case 'a': case 'A':
+                        msg.linear.x  =  0.0;
+                        msg.angular.z =  1.0;
+                        RCLCPP_INFO(this->get_logger(), "LEFT");
+                        break;
+                    case 'd': case 'D':
+                        msg.linear.x  =  0.0;
+                        msg.angular.z = -1.0;
+                        RCLCPP_INFO(this->get_logger(), "RIGHT");
+                        break;
+                    case 'x': case 'X':
+                        msg.linear.x  =  0.0;
+                        msg.angular.z =  0.0;
+                        RCLCPP_INFO(this->get_logger(), "STOP");
+                        break;
+                    case 'q': case 'Q':
+                        RCLCPP_INFO(this->get_logger(), "Quitting...");
+                        restore_mode();
+                        return;
+                    default:
+                        valid_key = false;
+                        break;
+                }
+                
+                if (valid_key)
+                {
+                    publisher_->publish(msg);
+                }
             }
-            publisher_->publish(msg);
+            
+            rclcpp::spin_some(this->get_node_base_interface());
         }
         restore_mode();
     }
@@ -68,6 +83,8 @@ private:
         tcgetattr(STDIN_FILENO, &original_termios_);
         struct termios raw = original_termios_;
         raw.c_lflag &= ~(ICANON | ECHO);
+        raw.c_cc[VMIN] = 1;
+        raw.c_cc[VTIME] = 0;
         tcsetattr(STDIN_FILENO, TCSANOW, &raw);
     }
 
