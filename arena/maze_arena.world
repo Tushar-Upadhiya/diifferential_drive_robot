@@ -103,7 +103,6 @@
       </link>
     </model>
 
-
     <model name="outer_left_wall">
       <static>true</static>
       <link name="link">
@@ -146,15 +145,29 @@
       </link>
     </model>
 
-    <model name="inner_wall_1">
+    <model name="inner_wall_1_bottom">
       <static>true</static>
       <link name="link">
-        <pose>2.0 3.0 0.25 0 0 0</pose>
+        <pose>2.0 1.25 0.25 0 0 0</pose>
         <collision name="coll">
-          <geometry><box><size>0.1 6.0 0.5</size></box></geometry>
+          <geometry><box><size>0.1 2.5 0.5</size></box></geometry>
         </collision>
         <visual name="vis">
-          <geometry><box><size>0.1 6.0 0.5</size></box></geometry>
+          <geometry><box><size>0.1 2.5 0.5</size></box></geometry>
+          <material><ambient>0.1 0.5 0.1 1</ambient><diffuse>0.1 0.5 0.1 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="inner_wall_1_top">
+      <static>true</static>
+      <link name="link">
+        <pose>2.0 5.25 0.25 0 0 0</pose>
+        <collision name="coll">
+          <geometry><box><size>0.1 3.5 0.5</size></box></geometry>
+        </collision>
+        <visual name="vis">
+          <geometry><box><size>0.1 3.5 0.5</size></box></geometry>
           <material><ambient>0.1 0.5 0.1 1</ambient><diffuse>0.1 0.5 0.1 1</diffuse></material>
         </visual>
       </link>
@@ -198,6 +211,24 @@
         <visual name="vis">
           <geometry><box><size>0.1 3.0 0.5</size></box></geometry>
           <material><ambient>0.1 0.5 0.1 1</ambient><diffuse>0.1 0.5 0.1 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="reward_block">
+      <static>true</static>
+      <pose>5.0 1.25 0.1 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><cylinder><radius>0.15</radius><length>0.2</length></cylinder></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><cylinder><radius>0.15</radius><length>0.2</length></cylinder></geometry>
+          <material>
+            <ambient>1.0 0.84 0.0 1</ambient>
+            <diffuse>1.0 0.84 0.0 1</diffuse>
+            <emissive>1.0 0.6 0.0 1</emissive>
+          </material>
         </visual>
       </link>
     </model>

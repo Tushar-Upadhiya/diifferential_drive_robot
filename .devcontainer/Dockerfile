@@ -29,3 +29,4 @@ RUN useradd -m $USERNAME && \
 
 USER $USERNAME
 WORKDIR /workspaces/${PWD##*/}
+RUN echo "alias sim='export GAZEBO_AUDIO=0 && ros2 launch gazebo_ros gazebo.launch.py world:=/workspaces/differential_drive_robot/arena/maze_arena.world'" >> ~/.bashrc
