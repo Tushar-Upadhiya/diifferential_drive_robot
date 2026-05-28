@@ -2,7 +2,8 @@
 #include <diff_drive_msgs/msg/coordinates.hpp>
 #include <memory>
 #include <cmath>
-
+#include <algorithm>
+#include <functional>
 #include <fcntl.h>
 #include <termios.h>
 #include <unistd.h>

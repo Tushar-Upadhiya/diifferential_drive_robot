@@ -1,0 +1,23 @@
+
+before running these commands , run these commands in each terminal:
+source /opt/ros/humble/setup.bash
+source install/setup.bash
+
+terminal1:
+ros2 launch gazebo_ros gazebo.launch.py world:=/path/to/your/enclosure.world
+
+terminal2:
+xacro multi_story_car.urdf.xacro > test_output.urdf
+
+# Purge any surviving entities from the physics register
+ros2 service call /delete_entity gazebo_msgs/srv/DeleteEntity "{name: 'robot_1'}"
+ros2 service call /delete_entity gazebo_msgs/srv/DeleteEntity "{name: 'robot_2'}"
+
+# Spawn Robot 1 safely inside the enclosure floor coordinates
+ros2 run gazebo_ros spawn_entity.py -file test_output.urdf -entity robot_1 -robot_namespace robot_1 -x 0.2 -y 0.2 -z 0.15 -Y 0.0
+
+# Spawn Robot 2 a full meter away along the internal floor vector
+ros2 run gazebo_ros spawn_entity.py -file test_output.urdf -entity robot_2 -robot_namespace robot_2 -x 1.2 -y 0.2 -z 0.15 -Y 0.0
+
+terminal 3:
+ros2 run rqt_plot rqt_plot

@@ -10,19 +10,19 @@
 
     <model name="wall_south">
       <static>true</static>
-      <pose>4.0 0.0 0.5 0 0 0</pose>
+      <pose>4.0 0.0 0.75 0 0 0</pose>
       <link name="link">
         <collision name="collision">
           <geometry>
             <box>
-              <size>8.0 0.2 1.0</size>
+              <size>8.0 0.2 1.5</size>
             </box>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <box>
-              <size>8.0 0.2 1.0</size>
+              <size>8.0 0.2 1.5</size>
             </box>
           </geometry>
           <material>
@@ -37,19 +37,19 @@
 
     <model name="wall_north">
       <static>true</static>
-      <pose>4.0 8.0 0.5 0 0 0</pose>
+      <pose>4.0 8.0 0.75 0 0 0</pose>
       <link name="link">
         <collision name="collision">
           <geometry>
             <box>
-              <size>8.0 0.2 1.0</size>
+              <size>8.0 0.2 1.5</size>
             </box>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <box>
-              <size>8.0 0.2 1.0</size>
+              <size>8.0 0.2 1.5</size>
             </box>
           </geometry>
           <material>
@@ -64,19 +64,19 @@
 
     <model name="wall_west">
       <static>true</static>
-      <pose>0.0 4.0 0.5 0 0 1.5708</pose>
+      <pose>0.0 4.0 0.75 0 0 1.5708</pose>
       <link name="link">
         <collision name="collision">
           <geometry>
             <box>
-              <size>8.0 0.2 1.0</size>
+              <size>8.0 0.2 1.5</size>
             </box>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <box>
-              <size>8.0 0.2 1.0</size>
+              <size>8.0 0.2 1.5</size>
             </box>
           </geometry>
           <material>
@@ -91,19 +91,19 @@
 
     <model name="wall_east">
       <static>true</static>
-      <pose>8.0 4.0 0.5 0 0 1.5708</pose>
+      <pose>8.0 4.0 0.75 0 0 1.5708</pose>
       <link name="link">
         <collision name="collision">
           <geometry>
             <box>
-              <size>8.0 0.2 1.0</size>
+              <size>8.0 0.2 1.5</size>
             </box>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <box>
-              <size>8.0 0.2 1.0</size>
+              <size>8.0 0.2 1.5</size>
             </box>
           </geometry>
           <material>
@@ -115,6 +115,7 @@
         </visual>
       </link>
     </model>
+
     <model name="goal_marker">
       <static>true</static>
       <pose>5.0 2.0 0.01 0 0 0</pose>
